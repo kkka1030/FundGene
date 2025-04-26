@@ -1,0 +1,7 @@
+[
+    {
+        "model": "gpt-3.5-turbo",
+        "api_key": "sk-7k7v6qHOyaXe0kYwHKcwH4aUIhWokNRpTCL19CGmDbKWtBs7",
+        "base_url": "https://api.zchat.tech/v1"
+    }
+]

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资讯中心 - FundGene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <a href="{{ url_for('index') }}">首页</a>
+        <a href="{{ url_for('strategy') }}">策略助手</a>
+        <a href="{{ url_for('behavior') }}">行为矫正</a>
+        <a href="{{ url_for('risk') }}">风控引擎</a>
+        <a href="{{ url_for('information') }}">资讯中心</a>
+    </aside>
+
+    <main>
+        <section>
+            <h1>资讯中心</h1>
+            <p>在这里，您可以获取最新的市场新闻和投资分析。</p>
+            <!-- 添加新闻和投资分析的详细内容 -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 FundGene - 智能投资助手</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

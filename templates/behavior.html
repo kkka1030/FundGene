@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行为矫正 - FundGene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For charts -->
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <a href="{{ url_for('index') }}">首页</a>
+        <a href="{{ url_for('strategy') }}">策略助手</a>
+        <a href="{{ url_for('behavior') }}">行为矫正</a>
+        <a href="{{ url_for('risk') }}">风控引擎</a>
+        <a href="{{ url_for('information') }}">资讯中心</a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <section>
+            <h1>行为矫正</h1>
+            <p>AI助手分析您的投资行为，识别偏差并提供优化建议。</p>
+        </section>
+
+        <section class="card">
+            <h2>行为偏差分析</h2>
+            <p>您的投资行为偏差已被检测，以下是AI的建议：</p>
+            <ul>
+                <li>避免频繁买卖，增加长期投资配置</li>
+                <li>保持冷静，不因短期市场波动而做出决策</li>
+                <li>多元化投资，减少单一资产风险</li>
+            </ul>
+        </section>
+
+        <!-- Chart for behavior analysis -->
+        <section class="card">
+            <h2>投资行为分析</h2>
+            <canvas id="behaviorChart"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 FundGene - 智能投资助手</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // Behavior analysis chart
+        const ctx = document.getElementById('behaviorChart').getContext('2d');
+        const behaviorChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['过度买卖', '恐惧', '贪婪', '追涨杀跌'],
+                datasets: [{
+                    label: '行为偏差程度',
+                    data: [80, 70, 85, 90],
+                    backgroundColor: '#4c7db5',
+                    borderColor: '#3d6d99',
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

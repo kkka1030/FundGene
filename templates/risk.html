@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风控引擎 - FundGene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- For charts -->
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <a href="{{ url_for('index') }}">首页</a>
+        <a href="{{ url_for('strategy') }}">策略助手</a>
+        <a href="{{ url_for('behavior') }}">行为矫正</a>
+        <a href="{{ url_for('risk') }}">风控引擎</a>
+        <a href="{{ url_for('information') }}">资讯中心</a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <section>
+            <h1>风控引擎</h1>
+            <p>AI助手帮助您实时监控投资组合，并提供调仓建议。</p>
+        </section>
+
+        <section class="card">
+            <h2>风险评估</h2>
+            <p>根据您的投资组合，AI助手给出以下风险评估：</p>
+            <ul>
+                <li>高风险资产占比过大，建议调整。</li>
+                <li>分散投资能有效降低风险。</li>
+                <li>建议增加防御型资产的配置。</li>
+            </ul>
+        </section>
+
+        <!-- Chart for risk assessment -->
+        <section class="card">
+            <h2>投资风险评估</h2>
+            <canvas id="riskChart"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 FundGene - 智能投资助手</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // Risk assessment chart
+        const ctx = document.getElementById('riskChart').getContext('2d');
+        const riskChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['低风险', '中风险', '高风险'],
+                datasets: [{
+                    label: '资产配置风险',
+                    data: [25, 35, 40],
+                    backgroundColor: ['#4c7db5', '#f5a623', '#f44336'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

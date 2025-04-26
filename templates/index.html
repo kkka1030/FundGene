@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - FundGene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <a href="{{ url_for('index') }}">首页</a>
+        <a href="{{ url_for('strategy') }}">策略助手</a>
+        <a href="{{ url_for('behavior') }}">行为矫正</a>
+        <a href="{{ url_for('risk') }}">风控引擎</a>
+        <a href="{{ url_for('information') }}">资讯中心</a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <section>
+            <h1>欢迎来到 FundGene</h1>
+            <p>智能基金投资助手，助力您的投资决策。</p>
+        </section>
+
+        <!-- Dashboard section for visualization -->
+        <section class="dashboard">
+            <div class="stat">
+                <h2>投资组合概况</h2>
+                <div class="graph"></div>
+                <p>最新投资数据</p>
+            </div>
+            <div class="stat">
+                <h2>风险评估</h2>
+                <div class="graph"></div>
+                <p>实时风险分析</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>最新市场动态</h2>
+            <p>在这里查看最新的市场变化与相关分析。</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 FundGene - 智能投资助手</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+
+

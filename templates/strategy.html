@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略助手 - FundGene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <a href="{{ url_for('index') }}">首页</a>
+        <a href="{{ url_for('strategy') }}">策略助手</a>
+        <a href="{{ url_for('behavior') }}">行为矫正</a>
+        <a href="{{ url_for('risk') }}">风控引擎</a>
+        <a href="{{ url_for('information') }}">资讯中心</a>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <section>
+            <h1>策略助手</h1>
+            <p>与AI助手对话，获取个性化的投资策略建议。</p>
+        </section>
+
+        <!-- Chatbot Interface -->
+        <section class="card chat-box">
+            <div id="chat-output">
+                <p><strong>AI:</strong> 你好！我可以帮助你分析投资策略。请告诉我你的投资需求或风险偏好。</p>
+            </div>
+            <input 
+                type="text" 
+                id="user-input" 
+                placeholder="请输入你的投资偏好..." 
+                onkeypress="if (event.keyCode === 13) sendMessage()"
+            />
+            <button onclick="sendMessage()">发送</button>
+        </section>
+
+        <!-- Chart for market prediction -->
+        <section class="card">
+            <h2>市场预测</h2>
+            <canvas id="marketChart"></canvas>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 FundGene - 智能投资助手</p>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Market prediction chart
+        const ctx = document.getElementById('marketChart').getContext('2d');
+        const marketChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                datasets: [{
+                    label: '市场预测',
+                    data: [65, 59, 80, 81, 56, 55],
+                    borderColor: '#4c7db5',
+                    backgroundColor: 'rgba(76, 125, 181, 0.2)',
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // 异步发送消息到 GPT API
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const chatOutput = document.getElementById('chat-output');
+
+            if (!userInput.trim()) {
+                alert("输入不能为空！");
+                return;
+            }
+
+            // 添加用户消息
+            chatOutput.innerHTML += `<p><strong>你:</strong> ${userInput}</p>`;
+            
+            try {
+                // 显示加载状态
+                const loader = `<p id="loading" style="color: #4c7db5;"><strong>AI:</strong> 思考中...</p>`;
+                chatOutput.innerHTML += loader;
+
+                // 发送请求到后端
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                // 移除加载提示
+                document.getElementById('loading')?.remove();
+
+                if (!response.ok) throw new Error(`请求失败: ${response.status}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    chatOutput.innerHTML += `<p style="color: red;"><strong>错误:</strong> ${data.error}</p>`;
+                } else {
+                    chatOutput.innerHTML += `<p><strong>AI:</strong> ${data.reply}</p>`;
+                }
+
+            } catch (error) {
+                chatOutput.innerHTML += `<p style="color: red;"><strong>错误:</strong> ${error.message}</p>`;
+            }
+
+            // 清空输入框并滚动到底部
+            document.getElementById('user-input').value = '';
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+    </script>
+</body>
+</html>
