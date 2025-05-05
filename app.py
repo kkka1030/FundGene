@@ -8,8 +8,8 @@ CORS(app)  # 允许跨域（如果前后端分离）
 
 # 设置 OpenAI API Key
 client = OpenAI(
-    api_key="sk-7k7v6qHOyaXe0kYwHKcwH4aUIhWokNRpTCL19CGmDbKWtBs7",  # 替换为你的 API Key
-    base_url="https://api.zchat.tech/v1"
+    api_key="",  # 替换为你的 API Key
+    base_url=""
 )
 
 # 设定 AI 的角色
